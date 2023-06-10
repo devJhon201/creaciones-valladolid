@@ -14,7 +14,7 @@ export default async function Home() {
       <CategorySidebar categories={categories}/>
       <div className="container px-4 ms-lg-5 my-5">
         <div className="row">
-          {products.map(product => <Product name={product.name} categories={product.categories} price={product.price.$numberDecimal} description={product.description} fabrics={product.fabrics} image={product.image} sizes={product.sizes} key={product.id} />)}
+          {products.map(product => <Product name={product.name} categories={product.categories} price={product.price.$numberDecimal} description={product.description} fabrics={product.fabrics} image={product.image} sizes={product.sizes} key={product._id} id={product._id} />)}
         </div>
       </div>
     </main>

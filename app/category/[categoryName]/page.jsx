@@ -26,7 +26,8 @@ const Category = async ({ params }) => {
               fabrics={product.fabrics}
               image={product.image}
               sizes={product.sizes}
-              key={product.id}
+              key={product._id}
+              id={product._id}
             />
           ))}
         </div>

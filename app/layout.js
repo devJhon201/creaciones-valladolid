@@ -2,6 +2,7 @@ import NavbarComponent from '@/components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Inter } from 'next/font/google'
 import './global.css'
+import ProductsContextProvider from '@/components/ProductsContext';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,9 +15,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={`${inter.className} min-vh-100`}>
-        <NavbarComponent />
+        <ProductsContextProvider>
+          <NavbarComponent />
           {children}
+        </ProductsContextProvider>
+
       </body>
-    </html>
+    </html >
   )
 }
