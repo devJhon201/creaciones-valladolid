@@ -19,17 +19,18 @@ const Cart = () => {
   const [localidad, setLocalidad] = useState("");
   const [provincia, setProvincia] = useState("");
   const [codigoPostal, setCodigoPostal] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [totalOrder, setTotalOrder] = useState(0);
 
   useEffect(() => {
-    let total = 0
+    let total = 0;
     selectedProducts.forEach(({ totalPrice }) => {
       total += totalPrice;
     });
-    setTotalOrder(total)
+    setTotalOrder(total);
   }, [selectedProducts]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -75,7 +76,13 @@ const Cart = () => {
         <p className="fs-4">{totalOrder}</p>
       </div>
       <div className="bg-secondary-subtle p-3 rounded my-2">
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form
+          noValidate
+          validated={validated}
+          action="/api/checkout_sessions"
+          method="POST"
+          onSubmit={handleSubmit}
+        >
           <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="validationCustom01">
               <Form.Label>Nombre</Form.Label>
@@ -84,6 +91,7 @@ const Cart = () => {
                 type="text"
                 placeholder="Nombre"
                 value={nombre}
+                name="name"
                 onChange={(e) => setNombre(e.target.value)}
               />
             </Form.Group>
@@ -93,17 +101,19 @@ const Cart = () => {
                 required
                 type="text"
                 placeholder="Nombre de la calle"
+                name="streetName"
                 value={calle}
                 onChange={(e) => setCalle(e.target.value)}
               />
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="numeroCalle">
-              <Form.Label>Número</Form.Label>
+              <Form.Label>Número Calle</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Número de calle"
                 required
                 value={numero}
+                name="streetNumber"
                 onChange={(e) => setNumero(e.target.value)}
               />
               <Form.Text>
@@ -120,6 +130,7 @@ const Cart = () => {
               <Form.Control
                 type="text"
                 placeholder="Localidad"
+                name="city"
                 value={localidad}
                 onChange={(e) => setLocalidad(e.target.value)}
                 required
@@ -133,6 +144,7 @@ const Cart = () => {
               <Form.Control
                 type="text"
                 placeholder="Provincia"
+                name="province"
                 value={provincia}
                 onChange={(e) => setProvincia(e.target.value)}
                 required
@@ -147,11 +159,38 @@ const Cart = () => {
                 type="text"
                 placeholder="Código Postal"
                 value={codigoPostal}
+                name="zipCode"
                 onChange={(e) => setCodigoPostal(e.target.value)}
                 required
               />
               <Form.Control.Feedback type="invalid">
                 Por favor indique un código postal para el envío.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="3" controlId="products">
+              <Form.Control
+                name="products"
+                type="hidden"
+                value={JSON.stringify(selectedProducts)}
+              />
+              <Form.Control.Feedback type="invalid">
+                Por favor indique un código postal para el envío.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+          <Form.Group as={Col} md="3" controlId="movil">
+              <Form.Label>Móvil</Form.Label>
+              <Form.Control
+                type="tel"
+                placeholder="Número de móvil"
+                value={phoneNumber}
+                name="phoneNumber"
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Por favor indique un número de móvil.
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
@@ -163,7 +202,9 @@ const Cart = () => {
               feedbackType="invalid"
             />
           </Form.Group>
-          <Button type="submit" variant="success" className="w-100">Pagar {totalOrder}€</Button>
+          <Button role="link" type="submit" variant="success" className="w-100">
+            Pagar {totalOrder}€
+          </Button>
         </Form>
       </div>
     </Container>
