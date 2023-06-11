@@ -22,6 +22,7 @@ const ProductsContextProvider = ({ children }) => {
         ) {
           setSelectedProducts((prev) => {
             prev[index].quantity += productToAdd.quantity;
+            prev[index].totalPrice = Number((prev[index].price * prev[index].quantity).toFixed(2))
             return [...prev];
           });
           break;
@@ -62,6 +63,7 @@ const ProductsContextProvider = ({ children }) => {
         } else {
           setSelectedProducts((prev) => {
             prev[index].quantity = quantity;
+            prev[index].totalPrice = Number((prev[index].price * prev[index].quantity).toFixed(2))
             return [...prev];
           });
           break;

@@ -14,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={`${inter.className} min-vh-100`}>
+      <body className={`${inter.className} min-vh-100 vh-100`}>
         <ProductsContextProvider>
           <NavbarComponent />
           {children}

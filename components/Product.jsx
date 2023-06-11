@@ -26,7 +26,7 @@ const Product = ({
   const [updatedPrice, setUpdatedPrice] = useState(price);
   const { addProductToCart } = useContext(ProductsContext);
   const [error, setError] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     price = Number(price);
@@ -85,6 +85,7 @@ const Product = ({
       size: selectedSize,
       fabric: selectedFabric,
       quantity,
+      totalPrice: Number((updatedPrice * quantity).toFixed(2))
     };
 
     addProductToCart(productToAdd);
@@ -176,7 +177,7 @@ const Product = ({
             </div>
           </div>
           <Badge className="fs-1" bg="success">
-            {updatedPrice}€
+          {(updatedPrice * quantity).toFixed(2)}€
           </Badge>
         </Card.Body>
 

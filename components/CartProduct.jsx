@@ -15,6 +15,7 @@ const CartProduct = ({
   size,
   fabric,
   quantity,
+  totalPrice
 }) => {
   let { removeProductFromCart, changeQuantityFromProduct } =
     useContext(ProductsContext);
@@ -70,7 +71,7 @@ const CartProduct = ({
       </div>
       <div className="col-12 d-flex align-items-center flex-column justify-content-center col-lg-2">
         <h5>Precio Total</h5>
-        <p>{(price * quantityState).toFixed(2)}</p>
+        <p>{totalPrice}€</p>
       </div>
       <div className="col-12 d-flex align-items-center flex-column justify-content-center col-lg-2 my-2">
         <Button
