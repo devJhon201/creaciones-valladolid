@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "./ProductsContext";
 import ErrorMessage from "./ErrorMessage";
+import Button from "react-bootstrap/Button";
 
 const Product = ({
   name,
@@ -23,8 +24,9 @@ const Product = ({
   const [priceFabric, setPriceFabric] = useState(0);
   const [priceSize, setPriceSize] = useState(0);
   const [updatedPrice, setUpdatedPrice] = useState(price);
-  const { setSelectedProducts, selectedProducts } = useContext(ProductsContext);
+  const { addProductToCart } = useContext(ProductsContext);
   const [error, setError] = useState("");
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     price = Number(price);
@@ -67,20 +69,27 @@ const Product = ({
       setError("Debe seleccionar la talla deseada.");
       return;
     }
+    if(!quantity) {
+      setError('Debe seleccionar una cantidad.');
+      return
+    }
     setError("");
-    setSelectedProducts((prev) => [
-      ...prev,
-      {
-        id,
-        name,
-        description,
-        price: updatedPrice,
-        image,
-        categories,
-        size: selectedSize,
-        fabric: selectedFabric,
-      },
-    ]);
+
+    const productToAdd = {
+      id,
+      name,
+      description,
+      price: updatedPrice,
+      image,
+      categories,
+      size: selectedSize,
+      fabric: selectedFabric,
+      quantity,
+    };
+
+    addProductToCart(productToAdd);
+
+    setQuantity(0);
   }
   return (
     <div className="col-12 col-lg-4 my-2">
@@ -141,6 +150,30 @@ const Product = ({
                 </option>
               ))}
             </Form.Select>
+          </div>
+          <div className="m-2 d-flex flex-column justify-content-center align-items-center">
+            <h6>Unidades</h6>
+            <div>
+              <Button
+                variant="dark"
+                onClick={() => {
+                  quantity > 0
+                    ? setQuantity((prev) => prev - 1)
+                    : setQuantity(0);
+                }}
+              >
+                -
+              </Button>
+              <span className="mx-3">{quantity}</span>
+              <Button
+                variant="dark"
+                onClick={() => {
+                  setQuantity((prev) => prev + 1);
+                }}
+              >
+                +
+              </Button>
+            </div>
           </div>
           <Badge className="fs-1" bg="success">
             {updatedPrice}€
