@@ -73,7 +73,7 @@ const Cart = () => {
       ))}
       <div>
         <h4>Total Pedido</h4>
-        <p className="fs-4">{totalOrder}</p>
+        <p className="fs-4">{totalOrder}€</p>
       </div>
       <div className="bg-secondary-subtle p-3 rounded my-2">
         <Form

@@ -1,14 +1,17 @@
 import { Schema, model, models } from 'mongoose';
 
-const { Decimal128, String, Number, Boolean } = Schema.Types
+const { Decimal128, String, Number, Boolean, ObjectId } = Schema.Types
 
 const productsSchema = new Schema({
     name: String,
     size: String,
     fabric: String,
     quantity: Number,
-    unitPrice: Decimal128
-
+    unitPrice: Decimal128,
+    description: String,
+    totalPrice: Decimal128,
+    image: String,
+    idOfProduct: ObjectId
 })
 
 const OrderSchema = new Schema({
