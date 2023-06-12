@@ -1,13 +1,17 @@
 import CategorySidebar from "@/components/CategorySidebar";
 import Product from "@/components/Product";
 
+const getData = async () => {
+  const productsData = await fetch(`${process.env.WEBSITE_URL}/api/products`, { next: { revalidate: 60 } })
+  const categoriesData = await fetch(`${process.env.WEBSITE_URL}/api/categories`, { next: { revalidate: 60 } })
+
+  return { productsData: productsData.json(), categoriesData: categoriesData.json() }
+}
+
 export default async function Home() {
-
-  const productsData = await fetch(`https://${process.env.VERCEL_URL}/api/products`, { next: { revalidate: 60 } })
-  const products = await productsData.json()
-
-  const categoriesData = await fetch(`https://${process.env.VERCEL_URL}/api/categories`, { next: { revalidate: 60 } })
-  const categories = await categoriesData.json()
+  const getDataRes = await getData()
+  const products = await getDataRes.productsData
+  const categories = await getDataRes.categoriesData
 
   return (
     <main className="d-lg-flex">
