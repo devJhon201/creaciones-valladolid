@@ -19,6 +19,7 @@
     "react-bootstrap": "^2.7.4",
     "react-dom": "18.2.0",
     "stripe": "^12.9.0",
+    "swr": "^2.1.5",
     "use-local-storage-state": "^18.3.3"
   }
 }

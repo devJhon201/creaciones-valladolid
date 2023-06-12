@@ -5,32 +5,35 @@ import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "@/components/ProductsContext";
 import Container from "react-bootstrap/Container";
 import Badge from "react-bootstrap/Badge";
+import useSWR from "swr";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 const Success = ({ searchParams }) => {
-  const [order, setOrder] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const {setSelectedProducts} = useContext(ProductsContext)
+  const { setSelectedProducts } = useContext(ProductsContext);
 
   useEffect(() => {
-    if (searchParams.success) {
-      setSelectedProducts([])
-      fetch(`/api/orders/?orderId=${searchParams.orderId}`)
-        .then((res) => res.json())
-        .then((json) => {
-          setOrder(json);
-          setIsLoading(false);
-        });
-    } else if (searchParams.canceled) {
-      setIsLoading(false);
-    }
-  }, []);
+    setSelectedProducts([])
+  }, [])
+
+  const { data: order, error, isLoading } = useSWR(`/api/orders/?orderId=${searchParams.orderId}`, fetcher)
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return (
+      <Container>
+        <div>Cargando...</div>
+      </Container>
+    );
+  } else if (error) {
+    return (
+      <Container>
+        <div>Error al cargar</div>
+      </Container>
+    );
   } else {
     if (searchParams.success) {
       return (
