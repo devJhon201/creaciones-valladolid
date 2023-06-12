@@ -27,14 +27,24 @@ const Product = ({
   const { addProductToCart } = useContext(ProductsContext);
   const [error, setError] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState('');
 
   useEffect(() => {
     price = Number(price);
     setUpdatedPrice(price + priceFabric + priceSize);
   }, [priceFabric, priceSize]);
 
+  function addedMessage () {
+    setAdded('Agregado al carrito')
+
+    setTimeout(() => {
+      setAdded('')
+    }, 3000)
+  }
+
   function handleSelectFabric(e) {
     if (!e.target.value) {
+      setSelectedFabric('')
       setPriceFabric(0);
       return;
     }
@@ -48,6 +58,7 @@ const Product = ({
 
   function handleSelectSize(e) {
     if (!e.target.value) {
+      setSelectedSize('')
       setPriceSize(0);
       return;
     }
@@ -90,8 +101,10 @@ const Product = ({
 
     addProductToCart(productToAdd);
 
-    setQuantity(0);
+    setQuantity(1);
+    addedMessage()
   }
+
   return (
     <div className="col-12 col-lg-4 my-2">
       <Card className="p-2 my-2 w-auto h-100">
@@ -180,7 +193,7 @@ const Product = ({
           {(updatedPrice * quantity).toFixed(2)}€
           </Badge>
         </Card.Body>
-
+        {added ? <div className="alert alert-success text-center" role="alert">{added}</div> : null}
         <Card.Link
           onClick={handleAddToCart}
           as="button"
