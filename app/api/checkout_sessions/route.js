@@ -88,8 +88,8 @@ export async function POST(req) {
       const session = await stripe.checkout.sessions.create({
         line_items: line_items,
         mode: 'payment',
-        success_url: `${process.env.WEBSITE_URL}/success?success=true&orderId=${order._id}`,
-        cancel_url: `${process.env.WEBSITE_URL}/success?canceled=true`,
+        success_url: `${process.env.WEBSITE_URL}/success/?success=true&orderId=${order._id}`,
+        cancel_url: `${process.env.WEBSITE_URL}/success/?canceled=true`,
         metadata: {orderId: order._id.toString()}
       });
       return NextResponse.redirect(session.url, { status: 303 });
