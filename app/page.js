@@ -3,10 +3,10 @@ import Product from "@/components/Product";
 
 export default async function Home() {
 
-  const productsData = await fetch(`${process.env.WEBSITE_URL}/api/products`, { next: { revalidate: 60 } })
+  const productsData = await fetch(`https://${process.env.VERCEL_URL}/api/products`, { next: { revalidate: 60 } })
   const products = await productsData.json()
 
-  const categoriesData = await fetch(`${process.env.WEBSITE_URL}/api/categories`, { next: { revalidate: 60 } })
+  const categoriesData = await fetch(`https://${process.env.VERCEL_URL}/api/categories`, { next: { revalidate: 60 } })
   const categories = await categoriesData.json()
 
   return (

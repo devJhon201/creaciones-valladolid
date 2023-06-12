@@ -3,12 +3,12 @@ import Product from "@/components/Product";
 
 const Category = async ({ params }) => {
   const categoryProductsData = await fetch(
-    `${process.env.WEBSITE_URL}/api/categories/${params.categoryName}`,
+    `https://${process.env.VERCEL_URL}/api/categories/${params.categoryName}`,
     { next: { revalidate: 60 } }
   );
   const categoryProducts = await categoryProductsData.json();
   const categoriesData = await fetch(
-    `${process.env.WEBSITE_URL}/api/categories`,
+    `https://${process.env.VERCEL_URL}/api/categories`,
     { next: { revalidate: 60 } }
   );
   const categories = await categoriesData.json();
