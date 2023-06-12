@@ -1,17 +1,29 @@
 import CategorySidebar from "@/components/CategorySidebar";
 import Product from "@/components/Product";
 
-const Category = async ({ params }) => {
+const getData = async (params) => {
   const categoryProductsData = await fetch(
     `${process.env.WEBSITE_URL}/api/categories/${params.categoryName}`,
-    { next: { revalidate: 60 } }
+    { cache: 'no-store' }
   );
-  const categoryProducts = await categoryProductsData.json();
+
   const categoriesData = await fetch(
     `${process.env.WEBSITE_URL}/api/categories`,
-    { next: { revalidate: 60 } }
+    { cache: 'no-store' }
   );
-  const categories = await categoriesData.json();
+
+  return {
+    categoryProductsData: categoryProductsData.json(),
+    categoriesData: categoriesData.json(),
+  };
+};
+
+const Category = async ({ params }) => {
+  const getDataRes = await getData(params);
+
+  const categoryProducts = await getDataRes.categoryProductsData;
+
+  const categories = await getDataRes.categoriesData;
 
   return (
     <main className="d-lg-flex">

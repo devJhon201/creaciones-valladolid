@@ -2,8 +2,8 @@ import CategorySidebar from "@/components/CategorySidebar";
 import Product from "@/components/Product";
 
 const getData = async () => {
-  const productsData = await fetch(`${process.env.WEBSITE_URL}/api/products`, { next: { revalidate: 60 } })
-  const categoriesData = await fetch(`${process.env.WEBSITE_URL}/api/categories`, { next: { revalidate: 60 } })
+  const productsData = await fetch(`${process.env.WEBSITE_URL}/api/products`, { cache: 'no-store' })
+  const categoriesData = await fetch(`${process.env.WEBSITE_URL}/api/categories`, { cache: 'no-store' })
 
   return { productsData: productsData.json(), categoriesData: categoriesData.json() }
 }
