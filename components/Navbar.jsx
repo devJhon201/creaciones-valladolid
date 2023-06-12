@@ -18,8 +18,7 @@ const NavbarComponent = () => {
           >
               <Nav.Link href="/" as={Link}>Inicio</Nav.Link>
               <Nav.Link href="/cart" as={Link}>Carrito</Nav.Link>
-              <Nav.Link href="#hola" as={Link}>Contacto</Nav.Link>
-              <Nav.Link href="#otro" as={Link}>Iniciar Sesión</Nav.Link>
+              <Nav.Link href="/contact" as={Link}>Contacto</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
