@@ -1,14 +1,11 @@
 "use client";
 
-import { loadStripe } from "@stripe/stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "@/components/ProductsContext";
 import Container from "react-bootstrap/Container";
 import Badge from "react-bootstrap/Badge";
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
+
 
 const Success = ({ searchParams }) => {
   const [order, setOrder] = useState([]);
