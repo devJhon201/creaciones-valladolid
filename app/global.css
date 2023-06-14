@@ -1,26 +1,26 @@
 .btn-close {
-    background-color: white
+    background-color: white !important
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: white;
-    color: black;
+    background-color: white !important;
+    color: black !important;
 }
 
 .nav-link {
-    background-color: rgb(33, 37, 41);
-    color: white;
+    background-color: rgb(33, 37, 41) !important;
+    color: white !important;
 }
 
 .nav-link:hover {
-    background-color: white;
-    color: black;
+    background-color: white !important;
+    color: black !important;
 }
 
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
-    color: black;
+    color: black !important;
 }
 
 .nav-tabs .nav-link {
-    margin-bottom: unset;
+    margin-bottom: unset !important;
 }
