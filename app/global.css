@@ -16,7 +16,7 @@
     color: white !important;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-link.active:hover {
     background-color: white !important;
     color: black !important;
 }
