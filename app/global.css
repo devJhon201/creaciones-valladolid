@@ -1,5 +1,5 @@
 .btn-close {
-    background-color: white !important
+    background-color: white !important;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
@@ -12,12 +12,12 @@
     color: white !important;
 }
 
-.nav-link:hover {
-    background-color: white !important;
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
     color: black !important;
 }
 
-.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+.nav-link:hover {
+    background-color: white !important;
     color: black !important;
 }
 
