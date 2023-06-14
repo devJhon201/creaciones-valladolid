@@ -15,7 +15,7 @@ const CategorySidebar = ({ categories }) => {
 
   return (
     <div className="pe-lg-5 pt-lg-5 p-3 text-bg-dark">
-      <Button variant="light" className="d-lg-none text-decoration-underline" onClick={handleShow}>
+      <Button variant="light" className="d-lg-none" onClick={handleShow}>
         Categorías
       </Button>
 

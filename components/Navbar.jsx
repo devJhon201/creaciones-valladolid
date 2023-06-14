@@ -36,12 +36,12 @@ const NavbarComponent = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto" defaultActiveKey="/" variant="tabs">
             <Nav.Item className="p-2">
-              <Nav.Link href="/" as={Link}>
+              <Nav.Link className="p-2" href="/" as={Link}>
                 Inicio
               </Nav.Link>
             </Nav.Item>
             <Nav.Item className="p-2">
-              <Nav.Link href="/cart" as={Link}>
+              <Nav.Link className="p-2" href="/cart" as={Link}>
                 Carrito
                 {productsQuantity > 0 ? (
                   <Badge bg="light" className="text-dark ms-1">
@@ -51,7 +51,7 @@ const NavbarComponent = () => {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item className="p-2">
-              <Nav.Link href="/contact" as={Link}>
+              <Nav.Link className="p-2" href="/contact" as={Link}>
                 Contacto
               </Nav.Link>
             </Nav.Item>
