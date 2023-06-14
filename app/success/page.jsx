@@ -17,14 +17,19 @@ const Success = ({ searchParams }) => {
   const { setSelectedProducts } = useContext(ProductsContext);
 
   useEffect(() => {
-    setSelectedProducts([]);
+    if (searchParams.success) setSelectedProducts([]);
   }, []);
 
   const {
     data: order,
     error,
     isLoading,
-  } = useSWR(`/api/orders/?orderId=${searchParams.orderId}`, fetcher);
+  } = useSWR(
+    searchParams.success
+      ? `/api/orders/?orderId=${searchParams.orderId}`
+      : null,
+    fetcher
+  );
 
   if (searchParams.success) {
     if (isLoading) {
@@ -83,7 +88,9 @@ const Success = ({ searchParams }) => {
               </div>
               <div className="col-6 d-flex align-items-center flex-column justify-content-center col-lg-2">
                 <h5>Precio Unidad</h5>
-                <Badge bg="success w-50">{unitPrice.$numberDecimal}€</Badge>
+                <Badge bg="light" className="text-dark w-50">
+                  {unitPrice.$numberDecimal}€
+                </Badge>
               </div>
               <div className="col-6 d-flex align-items-center flex-column justify-content-center col-lg-2">
                 <h6>Unidades</h6>
@@ -93,14 +100,18 @@ const Success = ({ searchParams }) => {
               </div>
               <div className="col-12 d-flex align-items-center flex-column justify-content-center col-lg-2">
                 <h5>Precio Total</h5>
-                <p>{totalPrice.$numberDecimal}€</p>
+                <p className="d-inline border border-light rounded p-2">
+                  {totalPrice.$numberDecimal}€
+                </p>
               </div>
             </div>
           )
         )}
-        <div>
+        <div className="m-3">
           <h4>Total Pedido</h4>
-          <p className="fs-4">{order.totalPrice.$numberDecimal}€</p>
+          <p className="fs-4 d-inline border rounded p-2 text-bg-light">
+            {order.totalPrice.$numberDecimal}€
+          </p>
         </div>
         <div>
           <p>Lo enviaremos a: {order.name}</p>
@@ -114,7 +125,7 @@ const Success = ({ searchParams }) => {
     );
   } else if (searchParams.canceled) {
     return (
-      <Container>
+      <Container className="my-2">
         <h2>No se ha podido conpletar tu pedido.</h2>
       </Container>
     );

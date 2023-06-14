@@ -189,7 +189,7 @@ const Product = ({
               </Button>
             </div>
           </div>
-          <Badge className="fs-1" bg="success">
+          <Badge className="fs-1" bg="dark">
           {(updatedPrice * quantity).toFixed(2)}€
           </Badge>
         </Card.Body>

@@ -14,7 +14,7 @@ const CategorySidebar = ({ categories }) => {
   const handleShow = () => setShow(true);
 
   return (
-    <div className="pe-lg-5 pt-lg-5 p-3 text-bg-dark">
+    <div className="pe-lg-5 pt-lg-5 p-3 text-bg-dark border-end">
       <Button variant="light" className="d-lg-none" onClick={handleShow}>
         Categorías
       </Button>

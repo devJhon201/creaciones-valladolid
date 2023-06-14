@@ -21,5 +21,8 @@
     "stripe": "^12.9.0",
     "swr": "^2.1.5",
     "use-local-storage-state": "^18.3.3"
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

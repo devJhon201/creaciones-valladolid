@@ -71,11 +71,11 @@ const Cart = () => {
           totalPrice={selectedProduct.totalPrice}
         ></CartProduct>
       ))}
-      <div>
+      <div className="m-3">
         <h4>Total Pedido</h4>
-        <p className="fs-4">{totalOrder}€</p>
+        <p className="fs-4 d-inline border rounded p-2 text-bg-light">{totalOrder.toFixed(2)}€</p>
       </div>
-      <div className="bg-secondary-subtle p-3 rounded my-2">
+      <div className="p-3 my-2">
         <Form
           noValidate
           validated={validated}
@@ -84,115 +84,131 @@ const Cart = () => {
           onSubmit={handleSubmit}
         >
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationCustom01">
-              <Form.Label>Nombre</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Nombre"
-                value={nombre}
-                name="name"
-                onChange={(e) => setNombre(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="calle">
-              <Form.Label>Calle</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Nombre de la calle"
-                name="streetName"
-                value={calle}
-                onChange={(e) => setCalle(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="numeroCalle">
-              <Form.Label>Número Calle</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Número de calle"
-                required
-                value={numero}
-                name="streetNumber"
-                onChange={(e) => setNumero(e.target.value)}
-              />
-              <Form.Text>
-                Si la calle no tiene numero escriba S/N o el número cero (0)
-              </Form.Text>
-              <Form.Control.Feedback type="invalid">
-                Por favor indique un numero de calle.
-              </Form.Control.Feedback>
-            </Form.Group>
+            <Col lg={5}>
+              <Form.Group md="4" controlId="validationCustom01">
+                <Form.Label>Nombre</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Nombre"
+                  value={nombre}
+                  name="name"
+                  onChange={(e) => setNombre(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+            <Col lg={5}>
+              <Form.Group md="4" controlId="calle">
+                <Form.Label>Calle</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Nombre de la calle"
+                  name="streetName"
+                  value={calle}
+                  onChange={(e) => setCalle(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+            <Col lg={2}>
+              <Form.Group md="4" controlId="numeroCalle">
+                <Form.Label>Número Calle</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Nº de calle"
+                  required
+                  value={numero}
+                  name="streetNumber"
+                  onChange={(e) => setNumero(e.target.value)}
+                />
+                <Form.Text className="text-bg-dark">
+                  Si la calle no tiene numero escriba S/N o el número cero (0)
+                </Form.Text>
+                <Form.Control.Feedback type="invalid">
+                  Por favor indique un numero de calle.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="localidad">
-              <Form.Label>Localidad</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Localidad"
-                name="city"
-                value={localidad}
-                onChange={(e) => setLocalidad(e.target.value)}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Por favor indique una localidad para el envío.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md="3" controlId="provincia">
-              <Form.Label>Provincia</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Provincia"
-                name="province"
-                value={provincia}
-                onChange={(e) => setProvincia(e.target.value)}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Por favor indique una provincia para el envío.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md="3" controlId="codigoPostal">
-              <Form.Label>Código Postal</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Código Postal"
-                value={codigoPostal}
-                name="zipCode"
-                onChange={(e) => setCodigoPostal(e.target.value)}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Por favor indique un código postal para el envío.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md="3" controlId="products">
-              <Form.Control
-                name="products"
-                type="hidden"
-                value={JSON.stringify(selectedProducts)}
-              />
-              <Form.Control.Feedback type="invalid">
-                Por favor indique un código postal para el envío.
-              </Form.Control.Feedback>
-            </Form.Group>
+            <Col lg={5}>
+              <Form.Group md="6" controlId="localidad">
+                <Form.Label>Localidad</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Localidad"
+                  name="city"
+                  value={localidad}
+                  onChange={(e) => setLocalidad(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor indique una localidad para el envío.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col lg={5}>
+              <Form.Group md="3" controlId="provincia">
+                <Form.Label>Provincia</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Provincia"
+                  name="province"
+                  value={provincia}
+                  onChange={(e) => setProvincia(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor indique una provincia para el envío.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col lg={2}>
+              <Form.Group md="3" controlId="codigoPostal">
+                <Form.Label>Código Postal</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Código Postal"
+                  value={codigoPostal}
+                  name="zipCode"
+                  onChange={(e) => setCodigoPostal(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor indique un código postal para el envío.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group md="3" controlId="products">
+                <Form.Control
+                  name="products"
+                  type="hidden"
+                  value={JSON.stringify(selectedProducts)}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor indique un código postal para el envío.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
           </Row>
           <Row className="mb-3">
-          <Form.Group as={Col} md="3" controlId="movil">
-              <Form.Label>Móvil</Form.Label>
-              <Form.Control
-                type="tel"
-                placeholder="Número de móvil"
-                value={phoneNumber}
-                name="phoneNumber"
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Por favor indique un número de móvil.
-              </Form.Control.Feedback>
-            </Form.Group>
+            <Col lg={4}>
+              <Form.Group md="3" controlId="movil">
+                <Form.Label>Móvil</Form.Label>
+                <Form.Control
+                  type="tel"
+                  placeholder="Número de móvil"
+                  value={phoneNumber}
+                  name="phoneNumber"
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor indique un número de móvil.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
           </Row>
           <Form.Group className="mb-3">
             <Form.Check
@@ -203,7 +219,7 @@ const Cart = () => {
             />
           </Form.Group>
           <Button role="link" type="submit" variant="success" className="w-100">
-            Pagar {totalOrder}€
+            Pagar {totalOrder.toFixed(2)}€
           </Button>
         </Form>
       </div>

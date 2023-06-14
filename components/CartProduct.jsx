@@ -43,13 +43,13 @@ const CartProduct = ({
       </div>
       <div className="col-6 d-flex align-items-center flex-column justify-content-center col-lg-2">
         <h5>Precio Unidad</h5>
-        <Badge bg="success w-50">{price}€</Badge>
+        <Badge bg="light" className="text-dark w-50">{price.toFixed(2)}€</Badge>
       </div>
       <div className="col-6 d-flex align-items-center flex-column justify-content-center col-lg-2">
         <h6>Unidades</h6>
         <div>
           <Button
-            variant="dark"
+            variant="light"
             onClick={() => {
               quantityState > 0
                 ? setQuantityState((prev) => prev - 1)
@@ -60,7 +60,7 @@ const CartProduct = ({
           </Button>
           <span className="mx-3">{quantityState}</span>
           <Button
-            variant="dark"
+            variant="light"
             onClick={() => {
               setQuantityState((prev) => prev + 1);
             }}
@@ -71,7 +71,7 @@ const CartProduct = ({
       </div>
       <div className="col-12 d-flex align-items-center flex-column justify-content-center col-lg-2">
         <h5>Precio Total</h5>
-        <p>{totalPrice}€</p>
+        <p className="d-inline border border-light rounded p-2">{totalPrice.toFixed(2)}€</p>
       </div>
       <div className="col-12 d-flex align-items-center flex-column justify-content-center col-lg-2 my-2">
         <Button
