@@ -34,7 +34,7 @@ const Success = ({ searchParams }) => {
   if (searchParams.success) {
     if (isLoading) {
       return (
-        <Container>
+        <Container className="d-flex flex-column h-100 align-items-center justify-content-center">
           <div>Cargando...</div>
         </Container>
       );
@@ -116,8 +116,10 @@ const Success = ({ searchParams }) => {
         <div>
           <p>Lo enviaremos a: {order.name}</p>
           <p>
-            En la dirección: {order.streetName} {order.streetNumber},{" "}
-            {order.city} {order.zipCode}, {order.province}
+            En la dirección: {order.streetName}{" "}
+            {order.streetNumber ? null : order.streetNumber},{" "}
+            {order.additionalAddress}, {order.city} {order.zipCode},{" "}
+            {order.province}
           </p>
           <p>Número de contacto: {order.phoneNumber}</p>
         </div>

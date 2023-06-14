@@ -22,6 +22,7 @@ const OrderSchema = new Schema({
     province: String,
     zipCode: String,
     phoneNumber: String,
+    additionalAddress: String,
     products: [productsSchema],
     totalPrice: Decimal128,
     paid: Boolean

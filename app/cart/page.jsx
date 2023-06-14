@@ -20,6 +20,7 @@ const Cart = () => {
   const [provincia, setProvincia] = useState("");
   const [codigoPostal, setCodigoPostal] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [additionalAddress, setAdditionalAddress] = useState("");
   const [totalOrder, setTotalOrder] = useState(0);
 
   useEffect(() => {
@@ -97,41 +98,52 @@ const Cart = () => {
                 />
               </Form.Group>
             </Col>
-            <Col lg={5}>
-              <Form.Group md="4" controlId="calle">
-                <Form.Label>Calle</Form.Label>
+            <Col lg={4}>
+              <Form.Group md="4" controlId="via">
+                <Form.Label>Nombre de la Vía</Form.Label>
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Nombre de la calle"
+                  placeholder="Nombre de la vía"
                   name="streetName"
                   value={calle}
                   onChange={(e) => setCalle(e.target.value)}
                 />
               </Form.Group>
             </Col>
-            <Col lg={2}>
-              <Form.Group md="4" controlId="numeroCalle">
-                <Form.Label>Número Calle</Form.Label>
+            <Col lg={3}>
+              <Form.Group md="4" controlId="numeroVia">
+                <Form.Label>Número Vía</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Nº de calle"
-                  required
+                  placeholder="Nº de la Vía"
                   value={numero}
                   name="streetNumber"
                   onChange={(e) => setNumero(e.target.value)}
                 />
                 <Form.Text className="text-bg-dark">
-                  Si la calle no tiene numero escriba S/N o el número cero (0)
+                  Si la vía no tiene número deje este campo vacío
                 </Form.Text>
-                <Form.Control.Feedback type="invalid">
-                  Por favor indique un numero de calle.
-                </Form.Control.Feedback>
               </Form.Group>
             </Col>
           </Row>
           <Row className="mb-3">
-            <Col lg={5}>
+            <Col lg={4}>
+              <Form.Group md="6" controlId="datosAdicionales">
+                <Form.Label>Datos Adicionales</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Planta, Puerta, Escalera, etc..."
+                  name="additionalAddress"
+                  value={additionalAddress}
+                  onChange={(e) => setAdditionalAddress(e.target.value)}
+                />
+                <Form.Text className="text-bg-dark">
+                  Introduzca cualquier dato adicional relativo a su dirección de ser necesario.
+                </Form.Text>
+              </Form.Group>
+            </Col>
+            <Col lg={4}>
               <Form.Group md="6" controlId="localidad">
                 <Form.Label>Localidad</Form.Label>
                 <Form.Control
@@ -147,7 +159,7 @@ const Cart = () => {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-            <Col lg={5}>
+            <Col lg={4}>
               <Form.Group md="3" controlId="provincia">
                 <Form.Label>Provincia</Form.Label>
                 <Form.Control
@@ -160,22 +172,6 @@ const Cart = () => {
                 />
                 <Form.Control.Feedback type="invalid">
                   Por favor indique una provincia para el envío.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Col>
-            <Col lg={2}>
-              <Form.Group md="3" controlId="codigoPostal">
-                <Form.Label>Código Postal</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Código Postal"
-                  value={codigoPostal}
-                  name="zipCode"
-                  onChange={(e) => setCodigoPostal(e.target.value)}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Por favor indique un código postal para el envío.
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -193,6 +189,23 @@ const Cart = () => {
             </Col>
           </Row>
           <Row className="mb-3">
+          <Col lg={4}>
+              <Form.Group md="3" controlId="codigoPostal">
+                <Form.Label>Código Postal</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Código Postal"
+                  value={codigoPostal}
+                  pattern="[0-9]{5}"
+                  name="zipCode"
+                  onChange={(e) => setCodigoPostal(e.target.value)}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor indique un código postal para el envío.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
             <Col lg={4}>
               <Form.Group md="3" controlId="movil">
                 <Form.Label>Móvil</Form.Label>
@@ -201,11 +214,12 @@ const Cart = () => {
                   placeholder="Número de móvil"
                   value={phoneNumber}
                   name="phoneNumber"
+                  pattern="(6|7)[0-9]{8}"
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Por favor indique un número de móvil.
+                  Por favor indique un número de móvil válido.
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>

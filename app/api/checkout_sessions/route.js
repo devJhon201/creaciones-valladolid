@@ -9,7 +9,7 @@ const stripe = stripeImp(process.env.STRIPE_SECRET_KEY)
 
 export async function POST(req) {
   await connectMongoDB()
-  if (req.method === 'POST') {
+
     try {
       const form = await req.formData()
       const name = form.get('name')
@@ -19,6 +19,7 @@ export async function POST(req) {
       const province = form.get('province')
       const zipCode = form.get('zipCode')
       const phoneNumber = form.get('phoneNumber')
+      const additionalAddress = form.get('additionalAddress')
       const selectedProducts = JSON.parse(form.get('products'))
       const ids = selectedProducts.map(({ id }) => id)
       const productsFromDB = await Product.find({ _id: { $in: ids } }).exec()
@@ -81,7 +82,7 @@ export async function POST(req) {
       }
 
       const order = await Order.create({
-        name, streetName, streetNumber, city, province, zipCode, products, phoneNumber, totalPrice: totalPrice.toFixed(2), paid: false
+        name, streetName, streetNumber, city, province, zipCode, products, phoneNumber, additionalAddress, totalPrice: totalPrice.toFixed(2), paid: false
       })
 
       // Create Checkout Sessions from body params.
@@ -96,9 +97,4 @@ export async function POST(req) {
     } catch (err) {
       return NextResponse.json(err.message, { status: 500 });
     }
-  } else {
-    return new Response('Method not allowed', {
-      headers: { 'Allow': 'POST' }
-    })
-  }
 }

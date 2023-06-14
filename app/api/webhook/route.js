@@ -20,7 +20,6 @@ export async function POST(req) {
 
 
         if (event?.type === 'checkout.session.completed') {
-            console.log(event)
             const metadata = event.data?.object?.metadata
             const paymentStatus = event.data?.object?.payment_status
 
