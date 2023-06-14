@@ -1,3 +1,26 @@
 .btn-close {
     background-color: white
 }
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: white;
+    color: black;
+}
+
+.nav-link {
+    background-color: rgb(33, 37, 41);
+    color: white;
+}
+
+.nav-link:hover {
+    background-color: white;
+    color: black;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    color: black;
+}
+
+.nav-tabs .nav-link {
+    margin-bottom: unset;
+}

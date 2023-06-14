@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import {  useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import ListGroup from "react-bootstrap/ListGroup";
+import Nav from "react-bootstrap/Nav";
+import { usePathname } from "next/navigation";
 
 const CategorySidebar = ({ categories }) => {
   const [show, setShow] = useState(false);
@@ -12,10 +13,9 @@ const CategorySidebar = ({ categories }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   return (
-    <div className="pe-lg-5 pt-lg-5 text-bg-dark p-3">
-      <Button variant="light" className="d-lg-none" onClick={handleShow}>
+    <div className="pe-lg-5 pt-lg-5 p-3">
+      <Button variant="light" className="d-lg-none text-decoration-underline" onClick={handleShow}>
         Categorías
       </Button>
 
@@ -29,13 +29,28 @@ const CategorySidebar = ({ categories }) => {
           <Offcanvas.Title>Categorías</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <ListGroup>
+          <Nav
+            className="d-flex flex-column"
+            activeKey={usePathname()}
+            variant="pills"
+          >
             {categories.map((category) => (
-                <ListGroup.Item href={`/category/${category}`} key={category} action as={Link} className="text-capitalize text-bg-dark">
+              <Nav.Item
+                key={category}
+                className="text-capitalize my-2"
+              >
+                <Nav.Link
+                  href={`/category/${category}`}
+                  as={Link}
+                  onClick={() => {
+                    handleClose();
+                  }}
+                >
                   {category}
-                </ListGroup.Item>
+                </Nav.Link>
+              </Nav.Item>
             ))}
-          </ListGroup>
+          </Nav>
         </Offcanvas.Body>
       </Offcanvas>
     </div>
